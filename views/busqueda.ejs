@@ -1,0 +1,41 @@
+<div class="contenedor">
+  <h1><%= nombrePagina %></h1>
+  <% if (meetis.length > 0 ) { %>
+  <div class="grid columnas-md-3">
+    <% meetis.forEach(meeti => { %>
+    <div class="card">
+      <% if(meeti.grupo.imagen) { %>
+      <img src="/uploads/grupos/<%= meeti.grupo.imagen %>" />
+      <% } else { %>
+      <img src="/img/meeti.jpg" />
+      <% } %>
+      <div class="card-texto">
+        <% moment.locale('es'); %> <% const fecha = meeti.fecha +' '+
+        meeti.hora; %>
+        <p class="fecha"><%= moment(fecha).format('LLLL') %> Horas</p>
+        <a href="/meeti/<%= meeti.slug %>">
+          <h3><%= meeti.titulo %></h3>
+        </a>
+        <div class="info-autor">
+          <% if(meeti.usuario.imagen ) { %>
+          <div class="imagen">
+            <img src="/uploads/perfiles/<%= meeti.usuario.imagen %>" />
+          </div>
+          <% } else { %>
+          <div class="imagen"></div>
+          <% } %>
+
+          <div class="informacion">
+            <p>Organizado por:</p>
+            <p class="autor"><%= meeti.usuario.nombre %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <!--grid-->
+  <% } else { %>
+  <p>No hay resultados</p>
+  <% } %>
+</div>
